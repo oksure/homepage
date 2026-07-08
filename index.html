@@ -1,9 +1,211 @@
-<html>
-  <head>
-    <title>Practice Homepage</title>
-  </head>
-  <body>
-    <h1>This is the title</h1>
-    <p>This is the paragraph.</p>
-  </body>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hyunwoo Park | 프로필</title>
+    <style>
+        /* 로컬 및 시스템 폰트 적용으로 깔끔한 타이포그래피 구현 */
+        :root {
+            --bg-color: #f8f9fa;
+            --container-bg: #ffffff;
+            --text-color: #212529;
+            --text-muted: #6c757d;
+            --accent-color: #4f46e5;
+            --accent-hover: #4338ca;
+            --border-color: #dee2e6;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        /* 다크모드 스타일링 */
+        [data-theme="dark"] {
+            --bg-color: #0f172a;
+            --container-bg: #1e293b;
+            --text-color: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-color: #6366f1;
+            --accent-hover: #818cf8;
+            --border-color: #334155;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* 메인 컨테이너 */
+        .container {
+            max-width: 700px;
+            width: 100%;
+            background-color: var(--container-bg);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        /* 상단 헤더 & 토글 버튼 */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border-color);
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            color: var(--text-color);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--border-color);
+        }
+
+        /* 본문 스타일링 */
+        .intro-text {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            font-size: 1.3rem;
+            margin: 25px 0 15px 0;
+            color: var(--accent-color);
+        }
+
+        /* 리스트 및 카드 스타일 */
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 500px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            border-radius: 10px;
+            background-color: rgba(0,0,0,0.01);
+        }
+
+        .card h3 {
+            font-size: 1.05rem;
+            margin-bottom: 8px;
+        }
+
+        .card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* 링크 버튼 */
+        .btn-link {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .btn-link:hover {
+            background-color: var(--accent-hover);
+        }
+
+        /* 푸터 */
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>My Practice Space</h1>
+            <button class="theme-toggle" onclick="toggleTheme()">테마 변경</button>
+        </header>
+
+        <main>
+            <p class="intro-text">
+                GitHub Pages 실습을 위해 구축한 모던 스타일의 웹페이지입니다. CSS Flexbox와 Grid, 그리고 간단한 JavaScript를 활용하여 깔끔하고 보기 편한 레이아웃을 구현했습니다.
+            </p>
+
+            <h2>주요 학습 및 연구 활동</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Data Visualization</h3>
+                    <p>데이터의 숨겨진 인사이트를 시각적으로 명확하게 전달하는 구조와 대시보드를 설계합니다.</p>
+                </div>
+                <div class="card">
+                    <h3>Data Science & AI</h3>
+                    <p>최신 생성형 AI 모델과 데이터 프레임워크를 활용해 문제를 해결하는 방안을 탐구합니다.</p>
+                </div>
+            </div>
+
+            <h2>연락처 및 링크</h2>
+            <p style="margin-bottom: 15px;">프로젝트나 실습에 대해 더 자세한 내용이 궁금하시다면 아래 링크를 확인해보세요.</p>
+            <a href="https://github.com" target="_blank" class="btn-link">GitHub 프로필 방문하기</a>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 Practice Homepage. Built with HTML & CSS.</p>
+        </footer>
+    </div>
+
+    <script>
+        // 간단한 다크모드 토글 스크립트
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
+                document.documentElement.removeAttribute('data-theme');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        }
+    </script>
+</body>
 </html>
