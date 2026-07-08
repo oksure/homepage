@@ -1,211 +1,692 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hyunwoo Park | 프로필</title>
-    <style>
-        /* 로컬 및 시스템 폰트 적용으로 깔끔한 타이포그래피 구현 */
-        :root {
-            --bg-color: #f8f9fa;
-            --container-bg: #ffffff;
-            --text-color: #212529;
-            --text-muted: #6c757d;
-            --accent-color: #4f46e5;
-            --accent-hover: #4338ca;
-            --border-color: #dee2e6;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Practice Homepage</title>
 
-        /* 다크모드 스타일링 */
-        [data-theme="dark"] {
-            --bg-color: #0f172a;
-            --container-bg: #1e293b;
-            --text-color: #f8fafc;
-            --text-muted: #94a3b8;
-            --accent-color: #6366f1;
-            --accent-hover: #818cf8;
-            --border-color: #334155;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
-        }
+  <style>
+    :root {
+      --bg: #f6f7fb;
+      --card-bg: rgba(255, 255, 255, 0.78);
+      --text: #151827;
+      --muted: #666b7a;
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --border: rgba(120, 120, 140, 0.22);
+      --shadow: 0 20px 50px rgba(30, 35, 90, 0.12);
+      --radius: 24px;
+    }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            transition: background-color 0.3s, color 0.3s;
-        }
+    body.dark {
+      --bg: #0f1220;
+      --card-bg: rgba(25, 28, 45, 0.82);
+      --text: #f4f6ff;
+      --muted: #a9afc3;
+      --primary: #8b5cf6;
+      --primary-dark: #7c3aed;
+      --border: rgba(255, 255, 255, 0.12);
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            padding: 40px 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        /* 메인 컨테이너 */
-        .container {
-            max-width: 700px;
-            width: 100%;
-            background-color: var(--container-bg);
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: var(--shadow);
-            position: relative;
-        }
+    html {
+      scroll-behavior: smooth;
+    }
 
-        /* 상단 헤더 & 토글 버튼 */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 20px;
-        }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(99, 102, 241, 0.25), transparent 32%),
+        radial-gradient(circle at top right, rgba(236, 72, 153, 0.16), transparent 30%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
 
-        h1 {
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-        .theme-toggle {
-            background: none;
-            border: 1px solid var(--border-color);
-            padding: 8px 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            color: var(--text-color);
-            font-weight: 500;
-            font-size: 0.9rem;
-        }
+    .container {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
 
-        .theme-toggle:hover {
-            background-color: var(--border-color);
-        }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(16px);
+      background: rgba(255, 255, 255, 0.58);
+      border-bottom: 1px solid var(--border);
+    }
 
-        /* 본문 스타일링 */
-        .intro-text {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            margin-bottom: 30px;
-        }
+    body.dark header {
+      background: rgba(15, 18, 32, 0.68);
+    }
 
-        h2 {
-            font-size: 1.3rem;
-            margin: 25px 0 15px 0;
-            color: var(--accent-color);
-        }
+    .navbar {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
 
-        /* 리스트 및 카드 스타일 */
-        .grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      font-size: 1.1rem;
+    }
 
-        @media (max-width: 500px) {
-            .grid {
-                grid-template-columns: 1fr;
-            }
-        }
+    .logo-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--primary), #ec4899);
+      display: grid;
+      place-items: center;
+      color: white;
+      font-weight: 900;
+      box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
+    }
 
-        .card {
-            border: 1px solid var(--border-color);
-            padding: 20px;
-            border-radius: 10px;
-            background-color: rgba(0,0,0,0.01);
-        }
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
 
-        .card h3 {
-            font-size: 1.05rem;
-            margin-bottom: 8px;
-        }
+    nav a {
+      transition: color 0.2s ease;
+    }
 
-        .card p {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
+    nav a:hover {
+      color: var(--primary);
+    }
 
-        /* 링크 버튼 */
-        .btn-link {
-            display: inline-block;
-            background-color: var(--accent-color);
-            color: white;
-            text-decoration: none;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-weight: 600;
-            margin-top: 15px;
-            text-align: center;
-        }
+    .theme-toggle {
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      color: var(--text);
+      padding: 9px 13px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 700;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    }
 
-        .btn-link:hover {
-            background-color: var(--accent-hover);
-        }
+    .hero {
+      padding: 96px 0 70px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+      gap: 48px;
+    }
 
-        /* 푸터 */
-        footer {
-            margin-top: 40px;
-            text-align: center;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            border-top: 1px solid var(--border-color);
-            padding-top: 20px;
-        }
-    </style>
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--card-bg);
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 0.9rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    }
+
+    h1 {
+      margin-top: 24px;
+      font-size: clamp(2.6rem, 7vw, 5.4rem);
+      line-height: 1.02;
+      letter-spacing: -0.075em;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, var(--primary), #ec4899);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 1.12rem;
+      max-width: 620px;
+    }
+
+    .hero-actions {
+      margin-top: 34px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 20px;
+      border-radius: 999px;
+      font-weight: 800;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      box-shadow: 0 14px 30px rgba(99, 102, 241, 0.34);
+    }
+
+    .btn-secondary {
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      color: var(--text);
+    }
+
+    .hero-card {
+      position: relative;
+      padding: 28px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--card-bg);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: -80px -80px auto auto;
+      width: 180px;
+      height: 180px;
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.42), rgba(236, 72, 153, 0.32));
+      border-radius: 999px;
+      filter: blur(10px);
+    }
+
+    .browser-bar {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #ef4444;
+    }
+
+    .dot:nth-child(2) {
+      background: #f59e0b;
+    }
+
+    .dot:nth-child(3) {
+      background: #22c55e;
+    }
+
+    .preview-title {
+      font-size: 1.5rem;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      margin-bottom: 14px;
+    }
+
+    .preview-box {
+      margin-top: 18px;
+      padding: 18px;
+      border-radius: 18px;
+      background: rgba(99, 102, 241, 0.09);
+      border: 1px solid var(--border);
+    }
+
+    .stats {
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .stat {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.45);
+      border: 1px solid var(--border);
+    }
+
+    body.dark .stat {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.4rem;
+      color: var(--primary);
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+
+    section {
+      padding: 76px 0;
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 42px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      letter-spacing: -0.055em;
+      margin-bottom: 12px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .card {
+      padding: 28px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.06);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow);
+    }
+
+    .icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.17), rgba(236, 72, 153, 0.14));
+      font-size: 1.5rem;
+      margin-bottom: 18px;
+    }
+
+    .card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 10px;
+      letter-spacing: -0.03em;
+    }
+
+    .card p {
+      color: var(--muted);
+    }
+
+    .about {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .profile {
+      padding: 30px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.18), rgba(236, 72, 153, 0.13));
+      box-shadow: var(--shadow);
+    }
+
+    .avatar {
+      width: 90px;
+      height: 90px;
+      border-radius: 28px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--primary), #ec4899);
+      color: white;
+      font-size: 2.4rem;
+      font-weight: 900;
+      margin-bottom: 20px;
+    }
+
+    .profile h3 {
+      font-size: 1.6rem;
+      letter-spacing: -0.04em;
+      margin-bottom: 8px;
+    }
+
+    .profile p {
+      color: var(--muted);
+    }
+
+    .timeline {
+      padding: 30px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      box-shadow: var(--shadow);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-left: 28px;
+      padding-bottom: 24px;
+      border-left: 2px solid rgba(99, 102, 241, 0.25);
+    }
+
+    .timeline-item:last-child {
+      padding-bottom: 0;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -8px;
+      top: 0;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--primary);
+      box-shadow: 0 0 0 6px rgba(99, 102, 241, 0.12);
+    }
+
+    .timeline-item strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .timeline-item span {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .cta {
+      padding: 44px;
+      border-radius: 32px;
+      background:
+        linear-gradient(135deg, rgba(99, 102, 241, 0.92), rgba(236, 72, 153, 0.82)),
+        var(--primary);
+      color: white;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    .cta h2 {
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      line-height: 1.1;
+      letter-spacing: -0.06em;
+      margin-bottom: 14px;
+    }
+
+    .cta p {
+      max-width: 680px;
+      margin: 0 auto 26px;
+      opacity: 0.9;
+    }
+
+    .cta .btn {
+      background: white;
+      color: #4338ca;
+    }
+
+    footer {
+      padding: 34px 0;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-in.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 860px) {
+      nav {
+        display: none;
+      }
+
+      .hero,
+      .about {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 70px;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
+
 <body>
+  <header>
+    <div class="container navbar">
+      <a href="#" class="logo" aria-label="홈으로 이동">
+        <span class="logo-mark">P</span>
+        <span>Practice Home</span>
+      </a>
 
-    <div class="container">
-        <header>
-            <h1>My Practice Space</h1>
-            <button class="theme-toggle" onclick="toggleTheme()">테마 변경</button>
-        </header>
+      <nav aria-label="메인 메뉴">
+        <a href="#features">Features</a>
+        <a href="#about">About</a>
+        <a href="#start">Start</a>
+      </nav>
 
-        <main>
-            <p class="intro-text">
-                GitHub Pages 실습을 위해 구축한 모던 스타일의 웹페이지입니다. CSS Flexbox와 Grid, 그리고 간단한 JavaScript를 활용하여 깔끔하고 보기 편한 레이아웃을 구현했습니다.
-            </p>
-
-            <h2>주요 학습 및 연구 활동</h2>
-            <div class="grid">
-                <div class="card">
-                    <h3>Data Visualization</h3>
-                    <p>데이터의 숨겨진 인사이트를 시각적으로 명확하게 전달하는 구조와 대시보드를 설계합니다.</p>
-                </div>
-                <div class="card">
-                    <h3>Data Science & AI</h3>
-                    <p>최신 생성형 AI 모델과 데이터 프레임워크를 활용해 문제를 해결하는 방안을 탐구합니다.</p>
-                </div>
-            </div>
-
-            <h2>연락처 및 링크</h2>
-            <p style="margin-bottom: 15px;">프로젝트나 실습에 대해 더 자세한 내용이 궁금하시다면 아래 링크를 확인해보세요.</p>
-            <a href="https://github.com" target="_blank" class="btn-link">GitHub 프로필 방문하기</a>
-        </main>
-
-        <footer>
-            <p>&copy; 2026 Practice Homepage. Built with HTML & CSS.</p>
-        </footer>
+      <button class="theme-toggle" id="themeToggle" type="button">
+        🌙 Dark
+      </button>
     </div>
+  </header>
 
-    <script>
-        // 간단한 다크모드 토글 스크립트
-        function toggleTheme() {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            if (currentTheme === 'dark') {
-                document.documentElement.removeAttribute('data-theme');
-            } else {
-                document.documentElement.setAttribute('data-theme', 'dark');
-            }
+  <main>
+    <section class="hero container">
+      <div class="fade-in">
+        <span class="badge">🚀 GitHub Pages Practice</span>
+        <h1>
+          나만의 첫 번째<br />
+          <span class="gradient-text">모던 홈페이지</span>
+        </h1>
+        <p>
+          HTML 파일 하나만으로 만든 깔끔한 반응형 홈페이지입니다.
+          CSS와 JavaScript가 모두 이 파일 안에 포함되어 있어서 GitHub Pages 실습에 바로 사용할 수 있습니다.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#start">시작하기 →</a>
+          <a class="btn btn-secondary" href="#features">구성 보기</a>
+        </div>
+      </div>
+
+      <div class="hero-card fade-in">
+        <div class="browser-bar" aria-hidden="true">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+
+        <p class="preview-title">Homepage Preview</p>
+        <p>
+          심플한 구조, 부드러운 색감, 카드형 레이아웃, 다크 모드까지 포함한 연습용 홈페이지입니다.
+        </p>
+
+        <div class="preview-box">
+          <strong>오늘의 목표</strong>
+          <p>HTML 구조를 이해하고 GitHub Pages에 직접 배포해보기</p>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <strong>1</strong>
+            <span>HTML 파일</span>
+          </div>
+          <div class="stat">
+            <strong>0</strong>
+            <span>외부 CSS</span>
+          </div>
+          <div class="stat">
+            <strong>100%</strong>
+            <span>반응형</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="container">
+      <div class="section-heading fade-in">
+        <h2>무엇이 포함되어 있나요?</h2>
+        <p>
+          단순한 제목과 문단에서 벗어나 실제 홈페이지처럼 보이도록 기본적인 섹션들을 구성했습니다.
+        </p>
+      </div>
+
+      <div class="cards">
+        <article class="card fade-in">
+          <div class="icon">🎨</div>
+          <h3>모던한 디자인</h3>
+          <p>
+            그라디언트, 카드 UI, 부드러운 그림자, 둥근 모서리를 사용해 깔끔한 인상을 줍니다.
+          </p>
+        </article>
+
+        <article class="card fade-in">
+          <div class="icon">📱</div>
+          <h3>반응형 레이아웃</h3>
+          <p>
+            화면 크기에 따라 레이아웃이 자연스럽게 변해서 노트북과 모바일에서 모두 보기 좋습니다.
+          </p>
+        </article>
+
+        <article class="card fade-in">
+          <div class="icon">🌙</div>
+          <h3>다크 모드</h3>
+          <p>
+            오른쪽 위 버튼을 누르면 밝은 테마와 어두운 테마를 전환할 수 있습니다.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="about" class="container">
+      <div class="about">
+        <div class="profile fade-in">
+          <div class="avatar">ME</div>
+          <h3>안녕하세요!</h3>
+          <p>
+            이곳은 GitHub Pages 실습을 위해 만든 개인 홈페이지입니다.
+            자기소개, 프로젝트, 관심 분야 등을 자유롭게 바꿔 넣을 수 있습니다.
+          </p>
+        </div>
+
+        <div class="timeline fade-in">
+          <div class="timeline-item">
+            <strong>Step 1. HTML 파일 만들기</strong>
+            <span>기본 문서 구조를 만들고 내용을 채웁니다.</span>
+          </div>
+
+          <div class="timeline-item">
+            <strong>Step 2. 디자인 적용하기</strong>
+            <span>style 태그 안에 CSS를 작성해 홈페이지를 꾸밉니다.</span>
+          </div>
+
+          <div class="timeline-item">
+            <strong>Step 3. GitHub Pages 배포하기</strong>
+            <span>index.html 파일을 저장소에 올리고 웹사이트로 공개합니다.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="start" class="container">
+      <div class="cta fade-in">
+        <h2>이제 나만의 홈페이지로 바꿔보세요</h2>
+        <p>
+          제목, 소개 문구, 카드 내용, 색상만 바꿔도 완전히 다른 느낌의 홈페이지를 만들 수 있습니다.
+        </p>
+        <a class="btn" href="#">맨 위로 올라가기 ↑</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      © <span id="year"></span> Practice Homepage. Built with HTML, CSS and JavaScript.
+    </div>
+  </footer>
+
+  <script>
+    const themeToggle = document.getElementById("themeToggle");
+    const year = document.getElementById("year");
+
+    year.textContent = new Date().getFullYear();
+
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+
+      const isDark = document.body.classList.contains("dark");
+      themeToggle.textContent = isDark ? "☀️ Light" : "🌙 Dark";
+    });
+
+    const fadeItems = document.querySelectorAll(".fade-in");
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
         }
-    </script>
+      });
+    }, {
+      threshold: 0.15
+    });
+
+    fadeItems.forEach((item) => observer.observe(item));
+  </script>
 </body>
 </html>
