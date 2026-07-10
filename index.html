@@ -320,6 +320,96 @@
       gap: 20px;
     }
 
+    .data-panel {
+      padding: 30px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      box-shadow: var(--shadow);
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr auto;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .controls input,
+    .controls select {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.75);
+      color: var(--text);
+      outline: none;
+    }
+
+    body.dark .controls input,
+    body.dark .controls select {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .controls .btn {
+      border: none;
+      cursor: pointer;
+      padding: 12px 18px;
+    }
+
+    .data-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 18px;
+      margin-top: 16px;
+    }
+
+    .data-card {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+      background: rgba(255, 255, 255, 0.48);
+      overflow: auto;
+      max-height: 460px;
+    }
+
+    body.dark .data-card {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .data-card h3 {
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+
+    .table th,
+    .table td {
+      text-align: left;
+      padding: 9px 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .table th {
+      color: var(--muted);
+      font-size: 0.84rem;
+      position: sticky;
+      top: 0;
+      background: inherit;
+    }
+
+    .status {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
     .card {
       padding: 28px;
       border-radius: var(--radius);
@@ -502,6 +592,14 @@
       .stats {
         grid-template-columns: 1fr;
       }
+
+      .controls {
+        grid-template-columns: 1fr;
+      }
+
+      .data-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -516,6 +614,7 @@
 
       <nav aria-label="메인 메뉴">
         <a href="#features">Features</a>
+        <a href="#data">Data</a>
         <a href="#about">About</a>
         <a href="#start">Start</a>
       </nav>
@@ -529,14 +628,14 @@
   <main>
     <section class="hero container">
       <div class="fade-in">
-        <span class="badge">🚀 GitHub Pages Practice</span>
+        <span class="badge">🚀 Vercel Full Stack Practice</span>
         <h1>
           나만의 첫 번째<br />
           <span class="gradient-text">모던 홈페이지</span>
         </h1>
         <p>
           HTML 파일 하나만으로 만든 깔끔한 반응형 홈페이지입니다.
-          CSS와 JavaScript가 모두 이 파일 안에 포함되어 있어서 GitHub Pages 실습에 바로 사용할 수 있습니다.
+          프론트와 FastAPI 백엔드를 함께 연결한 풀스택 실습 페이지입니다. Vercel로 바로 배포할 수 있도록 구성했습니다.
         </p>
 
         <div class="hero-actions">
@@ -559,7 +658,7 @@
 
         <div class="preview-box">
           <strong>오늘의 목표</strong>
-          <p>HTML 구조를 이해하고 GitHub Pages에 직접 배포해보기</p>
+          <p>풀스택 구조를 이해하고 Vercel에 직접 배포해보기</p>
         </div>
 
         <div class="stats">
@@ -620,7 +719,7 @@
           <div class="avatar">ME</div>
           <h3>안녕하세요!</h3>
           <p>
-            이곳은 GitHub Pages 실습을 위해 만든 개인 홈페이지입니다.
+            이곳은 Vercel 배포 실습을 위해 만든 개인 홈페이지입니다.
             자기소개, 프로젝트, 관심 분야 등을 자유롭게 바꿔 넣을 수 있습니다.
           </p>
         </div>
@@ -637,9 +736,65 @@
           </div>
 
           <div class="timeline-item">
-            <strong>Step 3. GitHub Pages 배포하기</strong>
-            <span>index.html 파일을 저장소에 올리고 웹사이트로 공개합니다.</span>
+            <strong>Step 3. Vercel 배포하기</strong>
+            <span>리포지토리를 Vercel에 연결해 프론트와 API를 함께 공개합니다.</span>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="data" class="container">
+      <div class="section-heading fade-in">
+        <h2>FastAPI 데이터 연결</h2>
+        <p>
+          아래 패널은 현재 백엔드 API와 직접 연결되어 있습니다. 검색과 정렬을 바꿔보면 즉시 결과가 반영됩니다.
+        </p>
+      </div>
+
+      <div class="data-panel fade-in">
+        <div class="controls">
+          <input id="searchInput" type="text" placeholder="곡명 또는 아티스트 검색 (예: love, 아이유)" />
+          <select id="sortBySelect">
+            <option value="rank">정렬: 순위</option>
+            <option value="title">정렬: 곡명</option>
+            <option value="artist">정렬: 아티스트</option>
+          </select>
+          <select id="orderSelect">
+            <option value="asc">오름차순</option>
+            <option value="desc">내림차순</option>
+          </select>
+          <button id="applyFilterBtn" class="btn btn-primary" type="button">적용</button>
+        </div>
+
+        <div id="statusText" class="status">데이터 로딩 중...</div>
+
+        <div class="data-grid">
+          <article class="data-card">
+            <h3>Top Songs</h3>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Rank</th>
+                  <th>Title</th>
+                  <th>Artist</th>
+                </tr>
+              </thead>
+              <tbody id="songsTbody"></tbody>
+            </table>
+          </article>
+
+          <article class="data-card">
+            <h3>Artists</h3>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Artist</th>
+                  <th>Tracks</th>
+                </tr>
+              </thead>
+              <tbody id="artistsTbody"></tbody>
+            </table>
+          </article>
         </div>
       </div>
     </section>
@@ -664,6 +819,18 @@
   <script>
     const themeToggle = document.getElementById("themeToggle");
     const year = document.getElementById("year");
+    const searchInput = document.getElementById("searchInput");
+    const sortBySelect = document.getElementById("sortBySelect");
+    const orderSelect = document.getElementById("orderSelect");
+    const applyFilterBtn = document.getElementById("applyFilterBtn");
+    const songsTbody = document.getElementById("songsTbody");
+    const artistsTbody = document.getElementById("artistsTbody");
+    const statusText = document.getElementById("statusText");
+    const isLocalHost = ["localhost", "127.0.0.1"].includes(window.location.hostname);
+    const isLocalPreview = isLocalHost && window.location.port !== "8000";
+    const API_BASE = window.location.protocol === "file:" || isLocalPreview
+      ? "http://127.0.0.1:8000"
+      : "/api";
 
     year.textContent = new Date().getFullYear();
 
@@ -687,6 +854,79 @@
     });
 
     fadeItems.forEach((item) => observer.observe(item));
+
+    function renderSongs(songs) {
+      songsTbody.innerHTML = songs
+        .slice(0, 50)
+        .map((song) => `
+          <tr>
+            <td>${song.rank}</td>
+            <td>${song.title}</td>
+            <td>${song.artist}</td>
+          </tr>
+        `)
+        .join("");
+    }
+
+    function renderArtists(artists) {
+      artistsTbody.innerHTML = artists
+        .slice(0, 50)
+        .map((artist) => `
+          <tr>
+            <td>${artist.artist}</td>
+            <td>${artist.song_count}</td>
+          </tr>
+        `)
+        .join("");
+    }
+
+    async function loadData() {
+      const search = searchInput.value.trim();
+      const sortBy = sortBySelect.value;
+      const order = orderSelect.value;
+      const query = new URLSearchParams({ sort_by: sortBy, order });
+
+      if (search) {
+        query.set("search", search);
+      }
+
+      statusText.textContent = "백엔드에서 데이터를 가져오는 중...";
+
+      try {
+        const artistQuery = new URLSearchParams({ order });
+        if (search) {
+          artistQuery.set("search", search);
+        }
+
+        const [songsRes, artistsRes] = await Promise.all([
+          fetch(`${API_BASE}/songs?${query.toString()}`),
+          fetch(`${API_BASE}/artists?${artistQuery.toString()}`),
+        ]);
+
+        if (!songsRes.ok || !artistsRes.ok) {
+          throw new Error("API response failed");
+        }
+
+        const [songs, artists] = await Promise.all([songsRes.json(), artistsRes.json()]);
+
+        renderSongs(songs);
+        renderArtists(artists);
+        statusText.textContent = `노래 ${songs.length}개, 아티스트 ${artists.length}개를 불러왔습니다.`;
+      } catch (error) {
+        statusText.textContent = "데이터 로딩에 실패했습니다. FastAPI 서버 실행 상태를 확인해 주세요.";
+        songsTbody.innerHTML = "";
+        artistsTbody.innerHTML = "";
+      }
+    }
+
+    applyFilterBtn.addEventListener("click", loadData);
+    searchInput.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        loadData();
+      }
+    });
+
+    loadData();
   </script>
 </body>
 </html>

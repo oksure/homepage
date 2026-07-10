@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "functions": {
+    "backend.py": {
+      "includeFiles": "melon_top100.csv"
+    }
+  },
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "backend.py"
+    },
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ]
+}
